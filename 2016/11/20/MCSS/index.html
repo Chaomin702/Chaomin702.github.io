@@ -85,18 +85,18 @@
 
 
 <meta name="description" content="问题描述
-大小为$N$的数组$A$，其主要元素是一个出现次数超过$N/2$的元素（从而这样的元素最多有一个）。例如，数组$3,3,4,2,4,4,2,4,4$有一个主要元素，而数组$3,3,4,2,4,4,2,4$没有主要元素。如果没有主要元素，那么你的程序应该指出来。">
+最大公共子序列求和(Maximum Contiguous Subsequence Sum)：给定整数$A{1},A{2},…,A{N}$（可能有负数），求$\sum{k=i}^{j}A_{k}$的最大值（为方便起见，如果所有整数均为负数，则最大子序列和为0）。比如样例集合为$\left { -2,11,-4,13,-5,-2 \right }$，最长子序列和应为20。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="寻找主要元素">
-<meta property="og:url" content="http://Chaomin702.github.io/2016/11/20/main-elements/index.html">
+<meta property="og:title" content="MCSS">
+<meta property="og:url" content="http://Chaomin702.github.io/2016/11/20/MCSS/index.html">
 <meta property="og:site_name" content="Chaomin">
 <meta property="og:description" content="问题描述
-大小为$N$的数组$A$，其主要元素是一个出现次数超过$N/2$的元素（从而这样的元素最多有一个）。例如，数组$3,3,4,2,4,4,2,4,4$有一个主要元素，而数组$3,3,4,2,4,4,2,4$没有主要元素。如果没有主要元素，那么你的程序应该指出来。">
-<meta property="og:updated_time" content="2016-11-20T07:29:10.358Z">
+最大公共子序列求和(Maximum Contiguous Subsequence Sum)：给定整数$A{1},A{2},…,A{N}$（可能有负数），求$\sum{k=i}^{j}A_{k}$的最大值（为方便起见，如果所有整数均为负数，则最大子序列和为0）。比如样例集合为$\left { -2,11,-4,13,-5,-2 \right }$，最长子序列和应为20。">
+<meta property="og:updated_time" content="2016-11-20T07:38:41.082Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="寻找主要元素">
+<meta name="twitter:title" content="MCSS">
 <meta name="twitter:description" content="问题描述
-大小为$N$的数组$A$，其主要元素是一个出现次数超过$N/2$的元素（从而这样的元素最多有一个）。例如，数组$3,3,4,2,4,4,2,4,4$有一个主要元素，而数组$3,3,4,2,4,4,2,4$没有主要元素。如果没有主要元素，那么你的程序应该指出来。">
+最大公共子序列求和(Maximum Contiguous Subsequence Sum)：给定整数$A{1},A{2},…,A{N}$（可能有负数），求$\sum{k=i}^{j}A_{k}$的最大值（为方便起见，如果所有整数均为负数，则最大子序列和为0）。比如样例集合为$\left { -2,11,-4,13,-5,-2 \right }$，最长子序列和应为20。">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://Chaomin702.github.io/2016/11/20/main-elements/"/>
+  <link rel="canonical" href="http://Chaomin702.github.io/2016/11/20/MCSS/"/>
 
 
 
 
 
-  <title> 寻找主要元素 | Chaomin </title>
+  <title> MCSS | Chaomin </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://Chaomin702.github.io/2016/11/20/main-elements/">
+  <link itemprop="mainEntityOfPage" href="http://Chaomin702.github.io/2016/11/20/MCSS/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chaomin">
@@ -285,7 +285,7 @@
             
             
               
-                寻找主要元素
+                MCSS
               
             
           </h1>
@@ -298,7 +298,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-20T12:17:48+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-20T15:28:33+08:00">
                 2016-11-20
               </time>
             
@@ -314,8 +314,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/20/main-elements/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/main-elements/" itemprop="commentCount"></span>
+                <a href="/2016/11/20/MCSS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/MCSS/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -325,7 +325,7 @@
 
           
           
-             <span id="/2016/11/20/main-elements/" class="leancloud_visitors" data-flag-title="寻找主要元素">
+             <span id="/2016/11/20/MCSS/" class="leancloud_visitors" data-flag-title="MCSS">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -351,35 +351,55 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
-<p>大小为$N$的数组$A$，其主要元素是一个出现次数超过$N/2$的元素（从而这样的元素最多有一个）。例如，数组$3,3,4,2,4,4,2,4,4$有一个主要元素，而数组$3,3,4,2,4,4,2,4$没有主要元素。如果没有主要元素，那么你的程序应该指出来。</p>
+<p>最大公共子序列求和(Maximum Contiguous Subsequence Sum)：给定整数$A<em>{1},A</em>{2},…,A<em>{N}$（可能有负数），求$\sum</em>{k=i}^{j}A_{k}$的最大值（为方便起见，如果所有整数均为负数，则最大子序列和为0）。比如样例集合为$\left { -2,11,-4,13,-5,-2 \right }$，最长子序列和应为20。</p>
 </blockquote>
 <a id="more"></a>
-<p>下面是求解该问题的一个算法概要。</p>
-<blockquote>
-<p>首先找出主要元素的一个候选元(这是难点)。这个候选元是唯一有可能是主要元素的元素。第二步确定是否这个候选元是主要元素。为了找出候选元，构造第二个数组$B$。比较$A<em>{1}$和$A</em>{2}$，如果它们相等则取其中之一加到数组$B$中；否则什么都不做；然后比较$A<em>{3}$和$A</em>{4}$，按同样的方式处理，其次类推直到读完这个数组，然后递归的寻找数组B中的候选元，它也是$A$的候选元. (为什么?)</p>
+<h3 id="暴力求解"><a href="#暴力求解" class="headerlink" title="暴力求解"></a>暴力求解</h3><p>最直接可以想到的一种解法就是：枚举所有的公共序列，计算最大和即可。即：$max \; \; s<em>{j,k}=\sum</em>{i=j}^{k}a_{i}\; \; \; (0\leqslant j,k&lt;  N )$<br>思路很简单，直接给出代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubsequenceSumForce</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> maxSum = <span class="number">0</span>, thisSum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</div><div class="line">		thisSum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; N; j++)&#123;</div><div class="line">			thisSum += A[j];</div><div class="line">			<span class="keyword">if</span> (thisSum &gt;maxSum)</div><div class="line">				maxSum = thisSum;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> maxSum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设$F<em>{i}$为以元素$i$结尾的连续最大子序列的和。<br>那么对于第$i$个元素来说，要形成连续的最大子序列和，只和相邻的前一个元素有关。如果$A</em>{i}$加上以$A<em>{i-1}$结尾的最大连续子序列和$F</em>{i-1}$后为负数，那么$F<em>{i}=0$，否则$F</em>{i}=F<em>{i-1}+A</em>{i}$。<br>也就是：<br>$$F<em>{i}=max(0,F</em>{i-1}+A<em>{i})$$<br>其中$F</em>{0}=0$。<br>下面给个求解过程来感受一下。</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>-2</td>
+<td>11</td>
+<td>-4</td>
+<td>13</td>
+<td>-5</td>
+<td>-2</td>
+</tr>
+<tr>
+<td>F</td>
+<td>0</td>
+<td>11</td>
+<td>7</td>
+<td>20</td>
+<td>15</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<p>上述解法的正确性很容易用数学归纳法证明，在此略过。下面附上代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubsequenceSumDP1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> f = <span class="number">0</span>, maxSum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</div><div class="line">		f += A[i];</div><div class="line">		<span class="keyword">if</span> (f &lt; <span class="number">0</span>)</div><div class="line">			f = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (maxSum &lt; f)</div><div class="line">			maxSum = f;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> maxSum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="分而治之"><a href="#分而治之" class="headerlink" title="分而治之"></a>分而治之</h3><p>轮到<code>Divide and Conquer</code>这个强大的工具出场了。</p>
+<p>其实，最大连续序列和可能会在<code>三处</code>出现：</p>
 <ol>
-<li>递归如何终止?</li>
-<li>当N是奇数时, 如何处理?</li>
-<li>该算法的运行时间是多少?</li>
-<li>我们如何避免使用附加数组$B$?</li>
-<li>编写一个程序求解主要元素.</li>
+<li>输入数据的前半部分</li>
+<li>输入数据的后半部分</li>
+<li>跨越输入数据的中部而占据左右各半部分。</li>
 </ol>
-</blockquote>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先先考虑$N$为偶数的情况。<br>我们需要回答这样一个问题：<strong>$B$中的候选元也是$A$中的候选元。</strong></p>
-<h3 id="反证法"><a href="#反证法" class="headerlink" title="反证法"></a>反证法</h3><p>假设$m$是$A$的候选元在数组$B$中的出现次数，$n$是数组$B$中其他元素的个数，即：<br>$$m+n=M$$<br>其中$M$是数组B的大小。显然，$m&lt;n$。<br>而</p>
-<p>$$2m+2n+l=N$$</p>
-<p>其中$l$是$A<em>{i}$、$A</em>{i+1}$不相同的元素个数。<br>$l$所覆盖的元素最多只有$l/2$个$A$的候选元。所以说，$A$的候选元个数为$2m+l/2$。</p>
-<p>$$2m+\frac{l}{2}-\frac{N}{2}=\frac{4m+N-2m-2n-N}{2}=m-n&lt;0$$</p>
-<p>所以$A$中候选元的个数要小于$N/2$，假设矛盾，证毕。</p>
-<hr>
-<p>好了，到此，我们是时候拿起<strong>减而治之</strong>这个有力的武器了。<br>我们可以将问题$A$化简为$B$，而问题规模减小一半，不断的重复，直至数组规模为1或者0。<br>当然，别忘记$N$为奇数的情况，我们还需要做些小修改。</p>
-<p>当$N$为奇数时，先从前$N-1$个元素中寻找主元：</p>
-<ol>
-<li>如果找到主元确实存在，那么直接返回主元即可。</li>
-<li>否则，第$N$个元素可能是主元，我们需要遍历数组来确定它是否真的是主元。</li>
-</ol>
-<h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p>对于偶数：<br>$$T(n)=T(n/2)+n$$<br>不难解出<br>$$O(n)=n$$<br>对于奇数，确认主元存在需要$O(n)$的时间，遍历数组也需要$O(n)$的时间，总之是$O(n)$的时间。<br>最后附上代码<a href="https://github.com/Chaomin702/Algorithm.git" target="_blank" rel="external">GitHub</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMainElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> s = v.back();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size() - <span class="number">1</span>; i++)&#123;</div><div class="line">		<span class="keyword">if</span> (v[i] == s)</div><div class="line">			count++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (count&gt;v.size() / <span class="number">2</span>)</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMainElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span> (v.empty()) <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	<span class="keyword">if</span> (v.size() == <span class="number">1</span>) <span class="keyword">return</span> v[<span class="number">0</span>];</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; u;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + <span class="number">1</span> &lt; v.size(); i = i + <span class="number">2</span>)&#123;</div><div class="line">		<span class="keyword">if</span> (v[i] == v[i + <span class="number">1</span>])</div><div class="line">			u.push_back(v[i]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> res = findMainElement(u);</div><div class="line">	<span class="keyword">if</span> (v.size() % <span class="number">2</span> != <span class="number">0</span> &amp;&amp; res == <span class="number">-1</span> &amp;&amp; isMainElement(v))</div><div class="line">		<span class="keyword">return</span> v.back();</div><div class="line">	<span class="keyword">else</span> </div><div class="line">		<span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中前两种情况可以递归求解，第3种情况可以通过求出前半部分的最大和（包含前半部分的最后一个元素）和后半部分的最大和（包含后半部分的第一个元素）而得到，然后将这两个和加在一起。<br>最后，选出这三个最大和的最大者即可。<br>好，下面附上代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSumDC</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> l, <span class="keyword">int</span> h)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span> (h - l &lt; <span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">if</span> (A[l]&lt; <span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> A[l];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> centre = (l + h) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">int</span> leftMax = MaxSubSumDC(A, l, centre);</div><div class="line">	<span class="keyword">int</span> rightMax = MaxSubSumDC(A, centre + <span class="number">1</span>, h);</div><div class="line">	<span class="keyword">int</span> centreLeftMax = <span class="number">0</span>, centreLeftSum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = centre; i&gt;=l; i--)&#123;</div><div class="line">		centreLeftSum += A[i];</div><div class="line">		<span class="keyword">if</span> (centreLeftSum &gt; centreLeftMax)&#123;</div><div class="line">			centreLeftMax = centreLeftSum;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> centreRightMax = <span class="number">0</span>, centreRightSum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = centre + <span class="number">1</span>; i &lt;= h; i++)&#123;</div><div class="line">		centreRightSum += A[i];</div><div class="line">		<span class="keyword">if</span> (centreRightSum &gt; centreRightMax)</div><div class="line">			centreRightMax = centreRightSum;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> centreMax = centreLeftMax + centreRightMax;</div><div class="line">	<span class="keyword">return</span> max(max(leftMax, rightMax), centreMax);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>代码地址：<a href="https://github.com/Chaomin702/Algorithm.git" target="_blank" rel="external">Chaomin702</a></p>
+<h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p><strong>暴力法</strong>和<strong>动态规划</strong>的时间复杂付毋庸置疑，分别是$O(n^{2})，O(n)$。<br><strong>分治法</strong>略微有些复杂：<br>$$\left{\begin{matrix}<br>T(1)=1\<br>T(n)=T(n/2)+n<br>\end{matrix}\right.$$<br>也就是$O(n\log n)$</p>
 
       
     </div>
@@ -412,15 +432,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/11/20/main-elements/" rel="next" title="寻找主要元素">
+                <i class="fa fa-chevron-left"></i> 寻找主要元素
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/20/MCSS/" rel="prev" title="MCSS">
-                MCSS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -446,8 +466,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/20/main-elements/"
-           data-title="寻找主要元素" data-url="http://Chaomin702.github.io/2016/11/20/main-elements/">
+      <div class="ds-thread" data-thread-key="2016/11/20/MCSS/"
+           data-title="MCSS" data-url="http://Chaomin702.github.io/2016/11/20/MCSS/">
       </div>
     
   </div>
@@ -557,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反证法"><span class="nav-number">3.</span> <span class="nav-text">反证法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">时间复杂度分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力求解"><span class="nav-number">2.</span> <span class="nav-text">暴力求解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划"><span class="nav-number">3.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分而治之"><span class="nav-number">4.</span> <span class="nav-text">分而治之</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">时间复杂度分析</span></a></li></ol></div>
             
 
           </div>
