@@ -362,11 +362,8 @@
 
       
         
-          <p>前段时间参考着<code>moduo</code>实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Timing Wheel是个啥我们留待以后再谈，我们先介绍实现Timing Wheel的一种数据结构，circular buffer。</p>
-<h2 id="Circular-Buffer"><a href="#Circular-Buffer" class="headerlink" title="Circular Buffer"></a>Circular Buffer</h2><p>Circular Buffer（环形缓冲区），顾名思义，就是一个有固定大小的环形队列，当数据已满时，后来的数据会覆盖掉之前的数据。</p>
-<p> <img src="\images\Circular_Buffer_Animation.gif" alt="Circular_Buffer_Animation"></p>
-<p>具体的，我们需要维护一个固定大小的缓冲区，用<code>head_</code>和<code>tail_</code>来表示当前数据的起始位置，由于是线性缓冲区，我们需要注意边界条件。</p>
-<p> <img src="\images\cb.png" alt="图片2"></p>
+          <p> <img src="\images\Circular_Buffer_Animation.gif" alt="Circular_Buffer_Animation" title="A 24-byte keyboard circular buffer. from Wiki"></p>
+<p>前段时间参考着<code>muduo</code>实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Timing Wheel是个啥我们留待以后再谈，我们先介绍实现Timing Wheel的一种数据结构，Circular Buffer。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/11/21/circular-buffer/#more" rel="contents">
@@ -591,7 +588,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

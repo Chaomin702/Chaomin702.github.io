@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Data structure," />
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="前段时间参考着moduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Tim">
+<meta name="description" content="前段时间参考着muduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于T">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STL-style circular buffer">
 <meta property="og:url" content="http://Chaomin702.github.io/2016/11/21/circular-buffer/index.html">
 <meta property="og:site_name" content="Chaomin">
-<meta property="og:description" content="前段时间参考着moduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Tim">
+<meta property="og:description" content="前段时间参考着muduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于T">
 <meta property="og:image" content="http://Chaomin702.github.io/\images\Circular_Buffer_Animation.gif">
 <meta property="og:image" content="http://Chaomin702.github.io/\images\cb.png">
-<meta property="og:updated_time" content="2016-11-21T14:29:37.507Z">
+<meta property="og:updated_time" content="2016-11-22T02:20:39.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL-style circular buffer">
-<meta name="twitter:description" content="前段时间参考着moduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Tim">
+<meta name="twitter:description" content="前段时间参考着muduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于T">
 <meta name="twitter:image" content="http://Chaomin702.github.io/\images\Circular_Buffer_Animation.gif">
 
 
@@ -360,24 +360,30 @@
       
 
       
-        <p>前段时间参考着<code>moduo</code>实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Timing Wheel是个啥我们留待以后再谈，我们先介绍实现Timing Wheel的一种数据结构，circular buffer。</p>
-<h2 id="Circular-Buffer"><a href="#Circular-Buffer" class="headerlink" title="Circular Buffer"></a>Circular Buffer</h2><p>Circular Buffer（环形缓冲区），顾名思义，就是一个有固定大小的环形队列，当数据已满时，后来的数据会覆盖掉之前的数据。</p>
-<p> <img src="\images\Circular_Buffer_Animation.gif" alt="Circular_Buffer_Animation"></p>
-<p>具体的，我们需要维护一个固定大小的缓冲区，用<code>head_</code>和<code>tail_</code>来表示当前数据的起始位置，由于是线性缓冲区，我们需要注意边界条件。</p>
-<p> <img src="\images\cb.png" alt="图片2"></p>
+        <p> <img src="\images\Circular_Buffer_Animation.gif" alt="Circular_Buffer_Animation" title="A 24-byte keyboard circular buffer. from Wiki"></p>
+<p>前段时间参考着<code>muduo</code>实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Timing Wheel是个啥我们留待以后再谈，我们先介绍实现Timing Wheel的一种数据结构，Circular Buffer。</p>
 <a id="more"></a>
+<h2 id="Circular-Buffer"><a href="#Circular-Buffer" class="headerlink" title="Circular Buffer"></a>Circular Buffer</h2><p>Circular Buffer（环形缓冲区），顾名思义，就是一个有固定大小的环形队列，当数据已满时，后来的数据会覆盖掉之前的数据。</p>
+<p>具体的，我们需要维护一个固定大小的缓冲区，用<code>head_</code>和<code>tail_</code>来表示当前数据的起始位置，由于是线性缓冲区，我们需要注意边界条件。</p>
+<p> <img src="\images\cb.png" alt="图片2"> </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Alloc = <span class="built_in">std</span>::allocator&lt;T&gt;&gt;</div><div class="line"><span class="keyword">class</span> circular_buffer &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">  	pointer array_base_;	</div><div class="line">	pointer array_end_;</div><div class="line">	size_type array_size_;</div><div class="line">	pointer head_;		<span class="comment">//point to first element </span></div><div class="line">	pointer tail_;		<span class="comment">//point to next element of last, which should be destroy</span></div><div class="line">	size_type contents_size_;</div><div class="line">	allocator_type allocator_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们的设计目标是与STL兼容的Circular Buffer，所以iterator和allocator当然必不可少。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T, typename Alloc = std::allocator&lt;T&gt;&gt;</div><div class="line">class circular_buffer &#123;</div><div class="line">public:</div><div class="line">  	//定义大一堆类型名</div><div class="line">	typedef circular_buffer&lt;T, Alloc&gt; self_type;</div><div class="line">	typedef Alloc allocator_type;</div><div class="line">	typedef typename Alloc::value_type value_type;</div><div class="line">	typedef typename Alloc::pointer pointer;</div><div class="line">	typedef typename Alloc::const_pointer const_pointer;</div><div class="line">	typedef typename Alloc::reference reference;</div><div class="line">	typedef typename Alloc::const_reference const_reference;</div><div class="line">	typedef typename Alloc::size_type size_type;</div><div class="line">	typedef typename Alloc::difference_type difference_type;</div><div class="line">	explicit circular_buffer(const allocator_type&amp; alloc = allocator_type())</div><div class="line">    //迭代器设计</div><div class="line">    template &lt;typename E&gt;</div><div class="line">	class iterator_ : public std::iterator&lt;std::random_access_iterator_tag, E&gt; &#123;</div><div class="line">	public:</div><div class="line">      	typedef E elem_type;</div><div class="line">		typedef iterator_&lt;elem_type&gt; self_type;</div><div class="line">		typedef circular_buffer&lt;T, Alloc&gt; circular_buffer_type;</div><div class="line">    private:</div><div class="line">		const circular_buffer_type*  buf_;</div><div class="line">		pointer  pos_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>对于iterator，我们需要考虑这么两点：</p>
 <ol>
 <li>end如何定义</li>
-<li>operator &lt; 如何操作，因为head_可能会大于tail_</li>
+<li>operator &lt; 如何操作，因为<code>head_</code>可能会大于<code>tail_</code></li>
 </ol>
-<p>我们这里将end定义为空指针，在&lt;操作是，将end视为array_end_对待；对于其他iterator的&lt;操作，先对它们进行统一的线性化操作，返回当然iterator与head_的距离来进行比较。</p>
+<p>我们这里将end定义为空指针，在&lt;操作是，将end视为<code>array_end_</code>对待；对于其他iterator的&lt;操作，先对它们进行统一的线性化操作，返回当然iterator与<code>head_</code>的距离来进行比较。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">pointer <span class="title">linearize_pointer</span><span class="params">(<span class="keyword">const</span> self_type&amp; it)</span><span class="keyword">const</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> (it.pos_ == <span class="number">0</span>) ? buf_-&gt;array_end_ :</div><div class="line">  	(it.pos_ &lt; buf_-&gt;head_ ? it.pos_ + (buf_-&gt;array_end_ - buf_-&gt;head_) </div><div class="line">   : buf_-&gt;array_base_ + (it.pos_ - buf_-&gt;head_));</div><div class="line">&#125;</div><div class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> self_type&amp;rhs)<span class="keyword">const</span> &#123;</div><div class="line">   <span class="keyword">return</span> linearize_pointer(*<span class="keyword">this</span>) &lt; linearize_pointer(rhs);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>迭代器设计完，我们来看最关键的push_back和pop_front方法。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_front</span><span class="params">()</span> </span>&#123;</div><div class="line">  allocator_.destroy(head_);</div><div class="line">  <span class="keyword">if</span> (++head_ == array_end_)</div><div class="line">    head_ = array_base_;</div><div class="line">  --contents_size_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_front</span><span class="params">()</span> </span>&#123;</div><div class="line">  allocator_.destroy(head_);	</div><div class="line">  <span class="keyword">if</span> (++head_ == array_end_)</div><div class="line">    head_ = array_base_;</div><div class="line">  --contents_size_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们用[head_, tail_)来表示数据的边界，对于pop_front需要先destroy掉<code>head_</code>位置的元素，否则会有内存泄漏，然后前移一位即可。push_back与此同理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(const_reference new_value)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (full())</div><div class="line">    *tail_ = new_value;</div><div class="line">  <span class="keyword">else</span></div><div class="line">    allocator_.construct(tail_, new_value);</div><div class="line">  <span class="keyword">if</span> (++tail_ == array_end_)</div><div class="line">    tail_ = array_base_;</div><div class="line">  <span class="keyword">if</span> (contents_size_ &lt; array_size_)</div><div class="line">    ++contents_size_;</div><div class="line">  <span class="keyword">else</span></div><div class="line">    ++head_;</div><div class="line">  <span class="keyword">if</span> (head_ == array_end_)</div><div class="line">    head_ = array_base_;</div><div class="line">&#125;<span class="comment">//if else 有点多 -_-</span></div></pre></td></tr></table></figure>
+<p>最后还有operator [ ]方法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const_reference <span class="keyword">operator</span>[](size_type index)<span class="keyword">const</span> &#123;</div><div class="line">		assert(index &lt; size());</div><div class="line">		<span class="keyword">return</span> array_base_[(head_ - array_base_ + index) % array_size_];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​完整代码戳<a href="https://github.com/Chaomin702/circular_buffer" target="_blank" rel="external">这里</a>。:smile: </p>
+
       
     </div>
 
@@ -397,6 +403,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Data-structure/" rel="tag"># Data structure</a>
+          
+        </div>
       
 
       
@@ -493,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
