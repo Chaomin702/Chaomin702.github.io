@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Data structure," />
+  <meta name="keywords" content="Algorithm," />
 
 
 
@@ -84,19 +84,28 @@
 
 
 
-<meta name="description" content="前段时间参考着muduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于T">
+<meta name="description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。
+ADD Digital
+Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
+For example:
+Given num = 38, the process is like: 3 +">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STL-style circular buffer">
-<meta property="og:url" content="http://Chaomin702.github.io/2016/11/21/circular-buffer/index.html">
+<meta property="og:title" content="Happy Number And Digital Root">
+<meta property="og:url" content="http://Chaomin702.github.io/2016/12/27/HappyNumberAndDigitalRoot/index.html">
 <meta property="og:site_name" content="Chaomin">
-<meta property="og:description" content="前段时间参考着muduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于T">
-<meta property="og:image" content="http://Chaomin702.github.io/\images\Circular_Buffer_Animation.gif">
-<meta property="og:image" content="http://Chaomin702.github.io/\images\cb.png">
-<meta property="og:updated_time" content="2016-11-22T02:20:39.664Z">
+<meta property="og:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。
+ADD Digital
+Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
+For example:
+Given num = 38, the process is like: 3 +">
+<meta property="og:updated_time" content="2016-12-27T12:55:30.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STL-style circular buffer">
-<meta name="twitter:description" content="前段时间参考着muduo实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于T">
-<meta name="twitter:image" content="http://Chaomin702.github.io/\images\Circular_Buffer_Animation.gif">
+<meta name="twitter:title" content="Happy Number And Digital Root">
+<meta name="twitter:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。
+ADD Digital
+Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
+For example:
+Given num = 38, the process is like: 3 +">
 
 
 
@@ -124,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://Chaomin702.github.io/2016/11/21/circular-buffer/"/>
+  <link rel="canonical" href="http://Chaomin702.github.io/2016/12/27/HappyNumberAndDigitalRoot/"/>
 
 
 
 
 
-  <title> STL-style circular buffer | Chaomin </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Happy Number And Digital Root | Chaomin </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +280,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://Chaomin702.github.io/2016/11/21/circular-buffer/">
+  <link itemprop="mainEntityOfPage" href="http://Chaomin702.github.io/2016/12/27/HappyNumberAndDigitalRoot/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chaomin">
@@ -295,7 +304,7 @@
             
             
               
-                STL-style circular buffer
+                Happy Number And Digital Root
               
             
           </h1>
@@ -308,8 +317,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-21T19:59:55+08:00">
-                2016-11-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-27T19:33:22+08:00">
+                2016-12-27
               </time>
             
 
@@ -324,8 +333,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/21/circular-buffer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/21/circular-buffer/" itemprop="commentCount"></span>
+                <a href="/2016/12/27/HappyNumberAndDigitalRoot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/27/HappyNumberAndDigitalRoot/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -335,7 +344,7 @@
 
           
           
-             <span id="/2016/11/21/circular-buffer/" class="leancloud_visitors" data-flag-title="STL-style circular buffer">
+             <span id="/2016/12/27/HappyNumberAndDigitalRoot/" class="leancloud_visitors" data-flag-title="Happy Number And Digital Root">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -360,29 +369,35 @@
       
 
       
-        <p> <img src="\images\Circular_Buffer_Animation.gif" alt="Circular_Buffer_Animation" title="A 24-byte keyboard circular buffer. from Wiki"></p>
-<p>前段时间参考着<code>muduo</code>实现好后台之后，发现有许多的FIN_WAIT_2连接。回忆一下TCP状态图不难想到原因：服务器执行shutdown主动关闭连接，收到对端ACK后却迟迟收不到FIN，停留在FIN_WAIT_2。而默认情况下不会超时终止连接。一旦有恶意的客户端大量发起这种连接，最终会耗尽服务器资源导致奔溃。那么这个问题怎么解决呢？陈硕大大在他的书中介绍了Timing Wheel原理。至于Timing Wheel是个啥我们留待以后再谈，我们先介绍实现Timing Wheel的一种数据结构，Circular Buffer。</p>
-<a id="more"></a>
-<h2 id="Circular-Buffer"><a href="#Circular-Buffer" class="headerlink" title="Circular Buffer"></a>Circular Buffer</h2><p>Circular Buffer（环形缓冲区），顾名思义，就是一个有固定大小的环形队列，当数据已满时，后来的数据会覆盖掉之前的数据。</p>
-<p>具体的，我们需要维护一个固定大小的缓冲区，用<code>head_</code>和<code>tail_</code>来表示当前数据的起始位置，由于是线性缓冲区，我们需要注意边界条件。</p>
-<p> <img src="\images\cb.png" alt="图片2"> </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Alloc = <span class="built_in">std</span>::allocator&lt;T&gt;&gt;</div><div class="line"><span class="keyword">class</span> circular_buffer &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">  	pointer array_base_;	</div><div class="line">	pointer array_end_;</div><div class="line">	size_type array_size_;</div><div class="line">	pointer head_;		<span class="comment">//point to first element </span></div><div class="line">	pointer tail_;		<span class="comment">//point to next element of last, which should be destroy</span></div><div class="line">	size_type contents_size_;</div><div class="line">	allocator_type allocator_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们的设计目标是与STL兼容的Circular Buffer，所以iterator和allocator当然必不可少。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T, typename Alloc = std::allocator&lt;T&gt;&gt;</div><div class="line">class circular_buffer &#123;</div><div class="line">public:</div><div class="line">  	//定义大一堆类型名</div><div class="line">	typedef circular_buffer&lt;T, Alloc&gt; self_type;</div><div class="line">	typedef Alloc allocator_type;</div><div class="line">	typedef typename Alloc::value_type value_type;</div><div class="line">	typedef typename Alloc::pointer pointer;</div><div class="line">	typedef typename Alloc::const_pointer const_pointer;</div><div class="line">	typedef typename Alloc::reference reference;</div><div class="line">	typedef typename Alloc::const_reference const_reference;</div><div class="line">	typedef typename Alloc::size_type size_type;</div><div class="line">	typedef typename Alloc::difference_type difference_type;</div><div class="line">	explicit circular_buffer(const allocator_type&amp; alloc = allocator_type())</div><div class="line">    //迭代器设计</div><div class="line">    template &lt;typename E&gt;</div><div class="line">	class iterator_ : public std::iterator&lt;std::random_access_iterator_tag, E&gt; &#123;</div><div class="line">	public:</div><div class="line">      	typedef E elem_type;</div><div class="line">		typedef iterator_&lt;elem_type&gt; self_type;</div><div class="line">		typedef circular_buffer&lt;T, Alloc&gt; circular_buffer_type;</div><div class="line">    private:</div><div class="line">		const circular_buffer_type*  buf_;</div><div class="line">		pointer  pos_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>对于iterator，我们需要考虑这么两点：</p>
-<ol>
-<li>end如何定义</li>
-<li>operator &lt; 如何操作，因为<code>head_</code>可能会大于<code>tail_</code></li>
-</ol>
-<p>我们这里将end定义为空指针，在&lt;操作是，将end视为<code>array_end_</code>对待；对于其他iterator的&lt;操作，先对它们进行统一的线性化操作，返回当然iterator与<code>head_</code>的距离来进行比较。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">pointer <span class="title">linearize_pointer</span><span class="params">(<span class="keyword">const</span> self_type&amp; it)</span><span class="keyword">const</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> (it.pos_ == <span class="number">0</span>) ? buf_-&gt;array_end_ :</div><div class="line">  	(it.pos_ &lt; buf_-&gt;head_ ? it.pos_ + (buf_-&gt;array_end_ - buf_-&gt;head_) </div><div class="line">   : buf_-&gt;array_base_ + (it.pos_ - buf_-&gt;head_));</div><div class="line">&#125;</div><div class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> self_type&amp;rhs)<span class="keyword">const</span> &#123;</div><div class="line">   <span class="keyword">return</span> linearize_pointer(*<span class="keyword">this</span>) &lt; linearize_pointer(rhs);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>迭代器设计完，我们来看最关键的push_back和pop_front方法。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_front</span><span class="params">()</span> </span>&#123;</div><div class="line">  allocator_.destroy(head_);	</div><div class="line">  <span class="keyword">if</span> (++head_ == array_end_)</div><div class="line">    head_ = array_base_;</div><div class="line">  --contents_size_;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里我们用[head_, tail_)来表示数据的边界，对于pop_front需要先destroy掉<code>head_</code>位置的元素，否则会有内存泄漏，然后前移一位即可。push_back与此同理。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(const_reference new_value)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (full())</div><div class="line">    *tail_ = new_value;</div><div class="line">  <span class="keyword">else</span></div><div class="line">    allocator_.construct(tail_, new_value);</div><div class="line">  <span class="keyword">if</span> (++tail_ == array_end_)</div><div class="line">    tail_ = array_base_;</div><div class="line">  <span class="keyword">if</span> (contents_size_ &lt; array_size_)</div><div class="line">    ++contents_size_;</div><div class="line">  <span class="keyword">else</span></div><div class="line">    ++head_;</div><div class="line">  <span class="keyword">if</span> (head_ == array_end_)</div><div class="line">    head_ = array_base_;</div><div class="line">&#125;<span class="comment">//if else 有点多 -_-</span></div></pre></td></tr></table></figure>
-<p>最后还有operator [ ]方法。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const_reference <span class="keyword">operator</span>[](size_type index)<span class="keyword">const</span> &#123;</div><div class="line">		assert(index &lt; size());</div><div class="line">		<span class="keyword">return</span> array_base_[(head_ - array_base_ + index) % array_size_];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>​完整代码戳<a href="https://github.com/Chaomin702/circular_buffer" target="_blank" rel="external">这里</a>。:smile: </p>
+        <p>在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。</p>
+<h2 id="ADD-Digital"><a href="#ADD-Digital" class="headerlink" title="ADD Digital"></a>ADD Digital</h2><blockquote>
+<p>Given a non-negative integer <code>num</code>, repeatedly add all its digits until the result has only one digit.</p>
+<p>For example:</p>
+<p>Given <code>num = 38</code>, the process is like: <code>3 + 8 = 11</code>, <code>1 + 1 = 2</code>. Since <code>2</code> has only one digit, return it.</p>
+<p><strong>Follow up:</strong></p>
+<p>Could you do it without any loop/recursion in O(1) runtime?</p>
+</blockquote>
+<p>题目很简单，最简单的解法就如题目所述，不断地将<code>num</code>各位相加，最终得到一个个位数。问题是最终一定会得到一个个位数吗？</p>
+<p>我们用$S(n)$来表示数字$n$的各数位之和，假设$n$有$m$位($m&gt;1$)，$n=d_1+10d_2+\dots +10^{m-1}d_m$，那么$S(n)=d_1+d_2+\dots +d_m$，显然$S(n)&lt;n$，除非$d_2,d_3,\dots,d_m=0$，也就是$n$为个位数。所以说对n不断地进行数位求和，n一定会减小至个位数。</p>
+<p>事实上这里存在$O(1)$时间的解法，ADD Digital得到的数字称为digital root，digital root存在一条重要性质：</p>
+<p>记$dr(n)$为数字n的digital root，那么<br>$$<br>dr(n) = \left{\begin{array}{}<br>0 &amp;\text{if } n=0,\<br>9 &amp;\text{if } n \neq 0,n\equiv 0(\text{mod }9),\<br>n \text{ mod } 9 &amp;\text{if } n\not\equiv 0 (\text{mod }9)<br>\end{array}\right.<br>$$<br>简单点写就是$dr(n)=1+((n-1)\text{ mod }9)$。</p>
+<p>这条性质基于这样一个事实：$a\cdot100\equiv a\cdot10\equiv a \text{ mod }9$。</p>
+<p>假设有一个三位数$n$，则$n = a\cdot 10^2+b\cdot10^1+c$，那么<br>$$<br>dr(n) \equiv a\cdot10^2+b\cdot10^1+c \equiv a+b+c \;(\text{mod } 9)<br>$$<br>从而得到结论：数字$n$与它的digital root对模9同余！由此得到$(1)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">addDigits</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span> + (num<span class="number">-1</span>)%<span class="number">9</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Happy-Number"><a href="#Happy-Number" class="headerlink" title="Happy Number"></a>Happy Number</h2><blockquote>
+<p>Write an algorithm to determine if a number is “happy”.</p>
+<p>A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.</p>
+<p><strong>Example: </strong>19 is a happy number</p>
+<ul>
+<li>$1^2 + 9^2 = 82$</li>
+<li>$8^2 + 2^2 = 68$</li>
+<li>$6^2 + 8^2 = 10$</li>
+<li>$1^2 + 0^2 + 0^2 = 1$</li>
+</ul>
+</blockquote>
+<p>将Happy Number的各数位不断地求平方和，最终会得到1，而非Happy Number则会进入一个死循环$4, 16, 37, 58, 89, 145, 42, 20, 4, \dots$</p>
+<p>对于一个数$n$，假如它有$m$位，各数位平方和最多为$9^2m$，如果$m \geq 4$，那么$m\geq10^{m-1}&gt;81m$，多求几次平方和，一定会减小为一个三位数，而最大的三位数999的各数位平方和为243，也就是$[244,999]-&gt;[1,243]$，多推演几次这样的情况，会发现三位数的各数位平方和也就单调递减的，最终会变为两位数。当然两位数就没有这样的单调递减特性了，需要更复杂的证明，这里略过。。</p>
+<p>这道题说白了就是检测环路的问题，常见的单链表环路检测，或者hash表，或者直接去检测有没有4这个数字。</p>
 
       
     </div>
@@ -406,7 +421,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Data-structure/" rel="tag"># Data structure</a>
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
           
         </div>
       
@@ -415,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/20/main-elements/" rel="next" title="寻找主要元素">
-                <i class="fa fa-chevron-left"></i> 寻找主要元素
+              <a href="/2016/12/25/LFU/" rel="next" title="LFU">
+                <i class="fa fa-chevron-left"></i> LFU
               </a>
             
           </div>
@@ -424,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/22/Any/" rel="prev" title="Boost Any">
-                Boost Any <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -453,8 +464,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/21/circular-buffer/"
-           data-title="STL-style circular buffer" data-url="http://Chaomin702.github.io/2016/11/21/circular-buffer/">
+      <div class="ds-thread" data-thread-key="2016/12/27/HappyNumberAndDigitalRoot/"
+           data-title="Happy Number And Digital Root" data-url="http://Chaomin702.github.io/2016/12/27/HappyNumberAndDigitalRoot/">
       </div>
     
   </div>
@@ -564,7 +575,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Circular-Buffer"><span class="nav-number">1.</span> <span class="nav-text">Circular Buffer</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ADD-Digital"><span class="nav-number">1.</span> <span class="nav-text">ADD Digital</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Happy-Number"><span class="nav-number">2.</span> <span class="nav-text">Happy Number</span></a></li></ol></div>
             
 
           </div>
