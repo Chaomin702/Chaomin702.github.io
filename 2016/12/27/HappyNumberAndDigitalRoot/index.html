@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。
-ADD Digital
-Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
-For example:
-Given num = 38, the process is like: 3 +">
+<meta name="description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Happy Number And Digital Root">
 <meta property="og:url" content="http://Chaomin702.github.io/2016/12/27/HappyNumberAndDigitalRoot/index.html">
 <meta property="og:site_name" content="Chaomin">
-<meta property="og:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。
-ADD Digital
-Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
-For example:
-Given num = 38, the process is like: 3 +">
-<meta property="og:updated_time" content="2016-12-27T12:55:30.656Z">
+<meta property="og:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。">
+<meta property="og:image" content="http://Chaomin702.github.io/\images\CodeCogsEqn.gif">
+<meta property="og:updated_time" content="2016-12-27T13:16:12.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Happy Number And Digital Root">
-<meta name="twitter:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。
-ADD Digital
-Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
-For example:
-Given num = 38, the process is like: 3 +">
+<meta name="twitter:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。">
+<meta name="twitter:image" content="http://Chaomin702.github.io/\images\CodeCogsEqn.gif">
 
 
 
@@ -370,6 +360,7 @@ Given num = 38, the process is like: 3 +">
 
       
         <p>在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。</p>
+<a id="more"></a>
 <h2 id="ADD-Digital"><a href="#ADD-Digital" class="headerlink" title="ADD Digital"></a>ADD Digital</h2><blockquote>
 <p>Given a non-negative integer <code>num</code>, repeatedly add all its digits until the result has only one digit.</p>
 <p>For example:</p>
@@ -380,9 +371,10 @@ Given num = 38, the process is like: 3 +">
 <p>题目很简单，最简单的解法就如题目所述，不断地将<code>num</code>各位相加，最终得到一个个位数。问题是最终一定会得到一个个位数吗？</p>
 <p>我们用$S(n)$来表示数字$n$的各数位之和，假设$n$有$m$位($m&gt;1$)，$n=d_1+10d_2+\dots +10^{m-1}d_m$，那么$S(n)=d_1+d_2+\dots +d_m$，显然$S(n)&lt;n$，除非$d_2,d_3,\dots,d_m=0$，也就是$n$为个位数。所以说对n不断地进行数位求和，n一定会减小至个位数。</p>
 <p>事实上这里存在$O(1)$时间的解法，ADD Digital得到的数字称为digital root，digital root存在一条重要性质：</p>
-<p>记$dr(n)$为数字n的digital root，那么<br>$$<br>dr(n) = \left{\begin{array}{}<br>0 &amp;\text{if } n=0,\<br>9 &amp;\text{if } n \neq 0,n\equiv 0(\text{mod }9),\<br>n \text{ mod } 9 &amp;\text{if } n\not\equiv 0 (\text{mod }9)<br>\end{array}\right.<br>$$<br>简单点写就是$dr(n)=1+((n-1)\text{ mod }9)$。</p>
+<p>记$dr(n)$为数字n的digital root，那么</p>
+<p><img src="\images\CodeCogsEqn.gif" alt=""><br>$$<br>dr(n) = \left{\begin{array}{}<br>0 &amp;\text{if } n=0,\<br>9 &amp;\text{if } n \neq 0,n\equiv 0(\text{mod }9),\<br>n \text{ mod } 9 &amp;\text{if } n\not\equiv 0 (\text{mod }9)<br>\end{array}\right.<br>$$<br>简单点写就是$dr(n)=1+((n-1)\text{ mod }9)​$。</p>
 <p>这条性质基于这样一个事实：$a\cdot100\equiv a\cdot10\equiv a \text{ mod }9$。</p>
-<p>假设有一个三位数$n$，则$n = a\cdot 10^2+b\cdot10^1+c$，那么<br>$$<br>dr(n) \equiv a\cdot10^2+b\cdot10^1+c \equiv a+b+c \;(\text{mod } 9)<br>$$<br>从而得到结论：数字$n$与它的digital root对模9同余！由此得到$(1)$。</p>
+<p>假设有一个三位数$n$，则$n = a\cdot 10^2+b\cdot10^1+c$，那么<br>$$<br>dr(n) \equiv a\cdot10^2+b\cdot10^1+c \equiv a+b+c \;(\text{mod } 9)<br>$$<br>从而得到结论：数字$n$与它的digital root对模9同余！</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">addDigits</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span> + (num<span class="number">-1</span>)%<span class="number">9</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="Happy-Number"><a href="#Happy-Number" class="headerlink" title="Happy Number"></a>Happy Number</h2><blockquote>
 <p>Write an algorithm to determine if a number is “happy”.</p>
