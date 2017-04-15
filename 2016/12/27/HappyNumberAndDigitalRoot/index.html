@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Chaomin">
 <meta property="og:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。">
 <meta property="og:image" content="http://Chaomin702.github.io/\images\CodeCogsEqn.gif">
-<meta property="og:updated_time" content="2016-12-27T13:16:12.210Z">
+<meta property="og:updated_time" content="2016-12-27T13:33:12.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Happy Number And Digital Root">
 <meta name="twitter:description" content="在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。">
@@ -362,11 +362,8 @@
         <p>在LeetCode上遇到两个有趣的题目，写一下其背后的数学原理。</p>
 <a id="more"></a>
 <h2 id="ADD-Digital"><a href="#ADD-Digital" class="headerlink" title="ADD Digital"></a>ADD Digital</h2><blockquote>
-<p>Given a non-negative integer <code>num</code>, repeatedly add all its digits until the result has only one digit.</p>
-<p>For example:</p>
-<p>Given <code>num = 38</code>, the process is like: <code>3 + 8 = 11</code>, <code>1 + 1 = 2</code>. Since <code>2</code> has only one digit, return it.</p>
-<p><strong>Follow up:</strong></p>
-<p>Could you do it without any loop/recursion in O(1) runtime?</p>
+<p>Given a non-negative integer <code>num</code>, repeatedly add all its digits until the result has only one digit.<br>For example:<br>Given <code>num = 38</code>, the process is like: <code>3 + 8 = 11</code>, <code>1 + 1 = 2</code>. Since <code>2</code> has only one digit, return it.</p>
+<p><strong>Follow up:</strong><br>Could you do it without any loop/recursion in O(1) runtime?</p>
 </blockquote>
 <p>题目很简单，最简单的解法就如题目所述，不断地将<code>num</code>各位相加，最终得到一个个位数。问题是最终一定会得到一个个位数吗？</p>
 <p>我们用$S(n)$来表示数字$n$的各数位之和，假设$n$有$m$位($m&gt;1$)，$n=d_1+10d_2+\dots +10^{m-1}d_m$，那么$S(n)=d_1+d_2+\dots +d_m$，显然$S(n)&lt;n$，除非$d_2,d_3,\dots,d_m=0$，也就是$n$为个位数。所以说对n不断地进行数位求和，n一定会减小至个位数。</p>
@@ -431,6 +428,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/15/HW1-boot-xv6/" rel="prev" title="HW1_boot_xv6">
+                HW1_boot_xv6 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -502,7 +503,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -512,7 +513,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -587,8 +588,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

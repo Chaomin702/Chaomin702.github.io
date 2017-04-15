@@ -85,18 +85,29 @@
 
 
 <meta name="description" content="Lab2是要求实现Raft一致性算法，比Lab1的工作量大多了。。
-在实现Raft之前，我们需要搞清楚labrpc.go的内容。">
+Server StateRaft算法将server的状态划分为3种角色：Leader、Candidate、Follower。角色之间转换情况如下图所示。
+
+我们需要用多个chan来维护server的状态切换和同步。
+1234567891011121314151617181920212223242526272829303132333">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.824 Lab2 Raft">
 <meta property="og:url" content="http://Chaomin702.github.io/2016/12/20/LAB2/index.html">
 <meta property="og:site_name" content="Chaomin">
 <meta property="og:description" content="Lab2是要求实现Raft一致性算法，比Lab1的工作量大多了。。
-在实现Raft之前，我们需要搞清楚labrpc.go的内容。">
-<meta property="og:updated_time" content="2016-12-20T02:30:08.909Z">
+Server StateRaft算法将server的状态划分为3种角色：Leader、Candidate、Follower。角色之间转换情况如下图所示。
+
+我们需要用多个chan来维护server的状态切换和同步。
+1234567891011121314151617181920212223242526272829303132333">
+<meta property="og:image" content="http://Chaomin702.github.io/../images/State.jpg">
+<meta property="og:updated_time" content="2017-02-10T15:22:38.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6.824 Lab2 Raft">
 <meta name="twitter:description" content="Lab2是要求实现Raft一致性算法，比Lab1的工作量大多了。。
-在实现Raft之前，我们需要搞清楚labrpc.go的内容。">
+Server StateRaft算法将server的状态划分为3种角色：Leader、Candidate、Follower。角色之间转换情况如下图所示。
+
+我们需要用多个chan来维护server的状态切换和同步。
+1234567891011121314151617181920212223242526272829303132333">
+<meta name="twitter:image" content="http://Chaomin702.github.io/../images/State.jpg">
 
 
 
@@ -361,8 +372,10 @@
 
       
         <p>Lab2是要求实现Raft一致性算法，比Lab1的工作量大多了。。</p>
-<p>在实现Raft之前，我们需要搞清楚labrpc.go的内容。</p>
-
+<h2 id="Server-State"><a href="#Server-State" class="headerlink" title="Server State"></a>Server State</h2><p>Raft算法将server的状态划分为3种角色：Leader、Candidate、Follower。角色之间转换情况如下图所示。</p>
+<p><img src="../images/State.jpg" alt="State"></p>
+<p>我们需要用多个chan来维护server的状态切换和同步。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Role <span class="keyword">int</span></div><div class="line"><span class="keyword">const</span> (</div><div class="line">	Follower  Role = <span class="number">0</span></div><div class="line">	Candidate Role = <span class="number">1</span></div><div class="line">	Leader    Role = <span class="number">2</span></div><div class="line">)</div><div class="line"><span class="comment">// log entry</span></div><div class="line"><span class="keyword">type</span> LogEntry <span class="keyword">struct</span> &#123;</div><div class="line">	Command <span class="keyword">interface</span>&#123;&#125;</div><div class="line">	Term    <span class="keyword">int</span></div><div class="line">	Index   <span class="keyword">int</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// A Go object implementing a single Raft peer.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="keyword">type</span> Raft <span class="keyword">struct</span> &#123;</div><div class="line">	mu        sync.Mutex</div><div class="line">	peers     []*labrpc.ClientEnd</div><div class="line">	persister *Persister</div><div class="line">	me        <span class="keyword">int</span> <span class="comment">// index into peers[]</span></div><div class="line"></div><div class="line">	<span class="comment">// Your data here.</span></div><div class="line">	<span class="comment">// Look at the paper's Figure 2 for a description of what</span></div><div class="line">	<span class="comment">// state a Raft server must maintain.</span></div><div class="line"></div><div class="line">	<span class="comment">// Persistent state on all servers</span></div><div class="line">	currentTerm <span class="keyword">int</span></div><div class="line">	voteFor     <span class="keyword">int</span></div><div class="line">	logTable    []LogEntry</div><div class="line">	<span class="comment">// optimization</span></div><div class="line">	leaderId <span class="keyword">int</span></div><div class="line">	<span class="comment">// Volatile state on all servers</span></div><div class="line">	commitIndex <span class="keyword">int</span></div><div class="line">	lastApplied <span class="keyword">int</span></div><div class="line">	role        Role</div><div class="line">	<span class="comment">// Volatile state on leaders</span></div><div class="line">	nextIndex  []<span class="keyword">int</span></div><div class="line">	matchIndex []<span class="keyword">int</span></div><div class="line">	<span class="comment">// chan for sync</span></div><div class="line">	chanRole      <span class="keyword">chan</span> Role</div><div class="line">	chanCommitted <span class="keyword">chan</span> ApplyMsg</div><div class="line">	chanHeartbeat <span class="keyword">chan</span> <span class="keyword">bool</span></div><div class="line">	chanGrantVote <span class="keyword">chan</span> <span class="keyword">bool</span></div><div class="line">	chanAppend    []<span class="keyword">chan</span> <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -457,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -469,7 +491,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -479,7 +501,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -525,6 +547,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-State"><span class="nav-number">1.</span> <span class="nav-text">Server State</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -538,8 +576,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

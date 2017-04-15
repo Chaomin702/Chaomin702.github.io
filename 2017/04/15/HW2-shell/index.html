@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Algorithm," />
+  <meta name="keywords" content="6.828," />
 
 
 
@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="前天复习了《现代操作系统》关于存储管理的页面置换算法，刚好碰到LeetCode的LFU Cache这道题目。">
+<meta name="description" content="这个作业要求实现一个简易的shell，sh.c实现了递归下降分析，我们需要在此基础上完成exec、redirection、pipe等操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LFU">
-<meta property="og:url" content="http://Chaomin702.github.io/2016/12/25/LFU/index.html">
+<meta property="og:title" content="HW2_shell">
+<meta property="og:url" content="http://Chaomin702.github.io/2017/04/15/HW2-shell/index.html">
 <meta property="og:site_name" content="Chaomin">
-<meta property="og:description" content="前天复习了《现代操作系统》关于存储管理的页面置换算法，刚好碰到LeetCode的LFU Cache这道题目。">
-<meta property="og:updated_time" content="2016-12-25T13:00:26.306Z">
+<meta property="og:description" content="这个作业要求实现一个简易的shell，sh.c实现了递归下降分析，我们需要在此基础上完成exec、redirection、pipe等操作。">
+<meta property="og:updated_time" content="2017-04-15T15:07:18.388Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LFU">
-<meta name="twitter:description" content="前天复习了《现代操作系统》关于存储管理的页面置换算法，刚好碰到LeetCode的LFU Cache这道题目。">
+<meta name="twitter:title" content="HW2_shell">
+<meta name="twitter:description" content="这个作业要求实现一个简易的shell，sh.c实现了递归下降分析，我们需要在此基础上完成exec、redirection、pipe等操作。">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://Chaomin702.github.io/2016/12/25/LFU/"/>
+  <link rel="canonical" href="http://Chaomin702.github.io/2017/04/15/HW2-shell/"/>
 
 
 
 
 
-  <title> LFU | Chaomin </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> HW2_shell | Chaomin </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -268,7 +268,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://Chaomin702.github.io/2016/12/25/LFU/">
+  <link itemprop="mainEntityOfPage" href="http://Chaomin702.github.io/2017/04/15/HW2-shell/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chaomin">
@@ -292,7 +292,7 @@
             
             
               
-                LFU
+                HW2_shell
               
             
           </h1>
@@ -305,8 +305,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-25T20:05:01+08:00">
-                2016-12-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T22:58:51+08:00">
+                2017-04-15
               </time>
             
 
@@ -321,8 +321,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/25/LFU/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/25/LFU/" itemprop="commentCount"></span>
+                <a href="/2017/04/15/HW2-shell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/15/HW2-shell/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -332,7 +332,7 @@
 
           
           
-             <span id="/2016/12/25/LFU/" class="leancloud_visitors" data-flag-title="LFU">
+             <span id="/2017/04/15/HW2-shell/" class="leancloud_visitors" data-flag-title="HW2_shell">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,19 +357,23 @@
       
 
       
-        <p>前天复习了《现代操作系统》关于存储管理的页面置换算法，刚好碰到LeetCode的<a href="https://leetcode.com/problems/lfu-cache/" target="_blank" rel="external">LFU Cache</a>这道题目。</p>
+        <p>这个作业要求实现一个简易的shell，<code>sh.c</code>实现了递归下降分析，我们需要在此基础上完成exec、redirection、pipe等操作。</p>
 <a id="more"></a>
-<h2 id="LFU-Cache"><a href="#LFU-Cache" class="headerlink" title="LFU Cache"></a>LFU Cache</h2><blockquote>
-<p>Design and implement a data structure for <a href="https://en.wikipedia.org/wiki/Least_frequently_used" target="_blank" rel="external">Least Frequently Used (LFU)</a> cache. It should support the following operations: <code>get</code> and <code>set</code>.</p>
-<p><code>get(key)</code> - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.<br><code>set(key, value)</code> - Set or insert the value if the key is not already present. When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item. For the purpose of this problem, when there is a tie (i.e., two or more keys that have the same frequency), the least <strong>recently</strong> used key would be evicted.</p>
-<p><strong>Follow up:</strong><br>Could you do both operations in <strong>O(1)</strong> time complexity?</p>
-<p><strong>Example:</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt; LFUCache cache = <span class="keyword">new</span> LFUCache( <span class="number">2</span> <span class="comment">/* capacity */</span> );</div><div class="line">&gt;</div><div class="line">&gt; cache.<span class="built_in">set</span>(<span class="number">1</span>, <span class="number">1</span>);</div><div class="line">&gt; cache.<span class="built_in">set</span>(<span class="number">2</span>, <span class="number">2</span>);</div><div class="line">&gt; cache.get(<span class="number">1</span>);       <span class="comment">// returns 1</span></div><div class="line">&gt; cache.<span class="built_in">set</span>(<span class="number">3</span>, <span class="number">3</span>);    <span class="comment">// evicts key 2</span></div><div class="line">&gt; cache.get(<span class="number">2</span>);       <span class="comment">// returns -1 (not found)</span></div><div class="line">&gt; cache.get(<span class="number">3</span>);       <span class="comment">// returns 3.</span></div><div class="line">&gt; cache.<span class="built_in">set</span>(<span class="number">4</span>, <span class="number">4</span>);    <span class="comment">// evicts key 1.</span></div><div class="line">&gt; cache.get(<span class="number">1</span>);       <span class="comment">// returns -1 (not found)</span></div><div class="line">&gt; cache.get(<span class="number">3</span>);       <span class="comment">// returns 3</span></div><div class="line">&gt; cache.get(<span class="number">4</span>);       <span class="comment">// returns 4</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p><strong>LFU</strong>，也就是最近最少频率使用，当Cache已满时，优先置换访问频率最小的页面，如果有多个最小频率最小的页面，则置换访问时间最早的页面。LFU只需要支持两种操作，<code>get</code>和<code>set</code>，根据页面之间的频率优先级以及<strong>O(1)</strong>的查找时间，不难联想到利用hash map+priority queue来实现。</p>
-<p><code>set</code>和<code>get</code>操作都可能导致priority queue中节点位置的改变(re-heapify)，C++中priority_queue并未提供这种接口，得自己写一个了(摊手…)。</p>
-<p>来梳理一下思路，使用vector来保存(key, value)，unorder_map进行(key, index)的映射，其中index表示(key, value)在vector中的位置；为每一个(key, value)维护一个timestamp，用于优先级比较；<code>get</code>操作意味着页面优先级变大，需要进行下滤；<code>set</code>操作稍微复杂点，如果页面已存在，直接调用<code>get</code>即可，如果页面不存在，则新建一个页面，如果此时Cache已满，则替换掉最小节点，并下滤，否则push_back，并上滤。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">class LFUCache &#123;</div><div class="line">public:</div><div class="line">	struct Node &#123;</div><div class="line">		int key_;</div><div class="line">		int value_;</div><div class="line">		int freq_;</div><div class="line">		int timestamp_;</div><div class="line">		bool operator &lt; (const Node&amp; n) &#123;</div><div class="line">			if (freq_ &lt; n.freq_) return true;</div><div class="line">			else if (freq_ == n.freq_ &amp;&amp; timestamp_ &lt; n.timestamp_) return true;</div><div class="line">			else return false;</div><div class="line">		&#125;</div><div class="line">		explicit Node(int key, int value,int timestamp,int freq=0):key_(key), value_(value),timestamp_(timestamp),freq_(freq)&#123;&#125;</div><div class="line">	&#125;;</div><div class="line">	LFUCache(int capacity):clock_(0),capacity_(capacity) &#123;&#125;</div><div class="line"></div><div class="line">	int get(int key) &#123;</div><div class="line">		auto it = key2index_.find(key);</div><div class="line">		if (it != key2index_.end()) &#123;</div><div class="line">			int value = pq_[it-&gt;second].value_;</div><div class="line">			++pq_[it-&gt;second].freq_;</div><div class="line">			pq_[it-&gt;second].timestamp_ = ++clock_;</div><div class="line">			key2index_[it-&gt;first] = sink(it-&gt;second);</div><div class="line">			return value;</div><div class="line">		&#125;</div><div class="line">		else</div><div class="line">			return -1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void set(int key, int value) &#123;</div><div class="line">		//if exist, just update, or </div><div class="line">		//if not full, push_back,upstream, or tack place first, sink</div><div class="line">		if (capacity_ == 0) return;</div><div class="line">		auto it = key2index_.find(key);</div><div class="line">		if (it != key2index_.end()) &#123;</div><div class="line">			pq_[it-&gt;second].value_ = value;</div><div class="line">			++pq_[it-&gt;second].freq_;</div><div class="line">			pq_[it-&gt;second].timestamp_ = ++clock_;</div><div class="line">			key2index_[it-&gt;first] = sink(it-&gt;second);</div><div class="line">		&#125;</div><div class="line">		else &#123;</div><div class="line">			if (capacity_ &gt; pq_.size()) &#123;</div><div class="line">				pq_.push_back(Node(key, value, ++clock_));</div><div class="line">				key2index_[key] = upstream(pq_.size() - 1);</div><div class="line">			&#125;</div><div class="line">			else &#123;</div><div class="line">				key2index_.erase(pq_.front().key_);</div><div class="line">				pq_[0] = Node(key, value, ++clock_);</div><div class="line">				key2index_[key] = sink(0);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">private:</div><div class="line">	unordered_map&lt;int, int&gt; key2index_;</div><div class="line">	vector&lt;Node&gt; pq_;</div><div class="line">	int capacity_;</div><div class="line">	int clock_;</div><div class="line">	int sink(int index) &#123;</div><div class="line">		int left = index * 2 + 1, right = index * 2 + 2;</div><div class="line">		int target = index;	// target = min(left,right,index)</div><div class="line">		if (left &lt; pq_.size() &amp;&amp; pq_[left]&lt;pq_[index]) &#123;</div><div class="line">			target = left;</div><div class="line">		&#125;</div><div class="line">		if (right &lt; pq_.size() &amp;&amp; pq_[right] &lt; pq_[target]) &#123;</div><div class="line">			target = right;</div><div class="line">		&#125;</div><div class="line">		if (target != index) &#123;</div><div class="line">			std::swap(pq_[target], pq_[index]);</div><div class="line">			key2index_[pq_[index].key_] = index;</div><div class="line">			return sink(target);</div><div class="line">		&#125;</div><div class="line">		else</div><div class="line">			return index;</div><div class="line">	&#125;</div><div class="line">	int upstream(int index) &#123;</div><div class="line">		if (index == 0) return 0;</div><div class="line">		int father = (index - 1) / 2;</div><div class="line">		if (pq_[index] &lt; pq_[father]) &#123;</div><div class="line">			std::swap(pq_[index], pq_[father]);</div><div class="line">			key2index_[pq_[index].key_] = index;</div><div class="line">			return upstream(father);</div><div class="line">		&#125;</div><div class="line">		return index;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h2><p><code>man 3 exec</code>，不难写出如下代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="string">' '</span>:</div><div class="line">  ecmd = (<span class="keyword">struct</span> execcmd*)cmd;</div><div class="line">  <span class="keyword">if</span>(ecmd-&gt;argv[<span class="number">0</span>] == <span class="number">0</span>)</div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">  <span class="comment">//fprintf(stderr, "exec not implemented\n");</span></div><div class="line">  <span class="comment">// Your code here ...</span></div><div class="line">  ret = execvp(ecmd-&gt;argv[<span class="number">0</span>],ecmd-&gt;argv);</div><div class="line">  <span class="keyword">if</span>(ret&lt;<span class="number">0</span>)</div><div class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"exec failed\n"</span>);</div><div class="line">  <span class="keyword">break</span>;</div></pre></td></tr></table></figure>
+<p><code>execvp</code>会在PATH环境变量下搜索命令。</p>
+<h2 id="I-O-redirection"><a href="#I-O-redirection" class="headerlink" title="I/O redirection"></a>I/O redirection</h2><p>这里要注意<code>open(2)</code>的第三个参数。</p>
+<p><code>int open(const char *pathname, int flags, mode_t mode);</code></p>
+<p>如果flags中设置了O_CREAT，并且创建了新文件，那么必须设置mode，否则新文件的权限可能是随机值（这点我 不太确定）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="string">'&gt;'</span>:</div><div class="line"><span class="keyword">case</span> <span class="string">'&lt;'</span>:</div><div class="line">  rcmd = (<span class="keyword">struct</span> redircmd*)cmd;</div><div class="line">  <span class="comment">//fprintf(stderr, "redir not implemented\n");</span></div><div class="line">  <span class="comment">// Your code here ...</span></div><div class="line">  ret = close1(rcmd-&gt;fd);</div><div class="line">  ret = open(rcmd-&gt;file,rcmd-&gt;mode,S_IRUSR|S_IWUSR|S_IRGRP);</div><div class="line">  <span class="keyword">if</span>(ret!=rcmd-&gt;fd)</div><div class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"redir open failed\n"</span>);</div><div class="line">  runcmd(rcmd-&gt;cmd);</div><div class="line">  <span class="keyword">break</span>;</div></pre></td></tr></table></figure>
+<h2 id="PIPE"><a href="#PIPE" class="headerlink" title="PIPE"></a>PIPE</h2><p>关于pipe命令符的实现，xv6 book中已经讲解地很清楚了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="string">'|'</span>:</div><div class="line">  pcmd = (<span class="keyword">struct</span> pipecmd*)cmd;</div><div class="line">  <span class="comment">//fprintf(stderr, "pipe not implemented\n");</span></div><div class="line">  <span class="comment">// Your code here ...</span></div><div class="line">  <span class="keyword">if</span>(pipe(p)&lt;<span class="number">0</span>)</div><div class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"pipe failed"</span>);</div><div class="line">  <span class="keyword">if</span>(fork1()==<span class="number">0</span>)&#123;</div><div class="line">    close1(<span class="number">1</span>);</div><div class="line">    dup1(p[<span class="number">1</span>]);</div><div class="line">    close1(p[<span class="number">0</span>]);</div><div class="line">    close1(p[<span class="number">1</span>]);</div><div class="line">    runcmd(pcmd-&gt;left);</div><div class="line">  &#125;</div><div class="line">  close1(<span class="number">0</span>);</div><div class="line">  dup1(p[<span class="number">0</span>]);</div><div class="line">  close1(p[<span class="number">0</span>]);</div><div class="line">  close1(p[<span class="number">1</span>]);</div><div class="line">  runcmd(pcmd-&gt;right);</div><div class="line">  <span class="keyword">break</span>;</div></pre></td></tr></table></figure>
+<h2 id="Challenge-exercises"><a href="#Challenge-exercises" class="headerlink" title="Challenge exercises"></a>Challenge exercises</h2><p>我实现了lists of commands和background supporting，sub shells留待以后完成。</p>
+<p>先来看lists of commands的实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> listcmd&#123;</div><div class="line">  <span class="keyword">int</span> type;         <span class="comment">//;</span></div><div class="line">  <span class="keyword">struct</span> cmd* cmd;</div><div class="line">  <span class="keyword">struct</span> cmd* next;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//runcmd</span></div><div class="line">  <span class="keyword">case</span> <span class="string">';'</span>:</div><div class="line">    lcmd = (<span class="keyword">struct</span> listcmd*)cmd;</div><div class="line">    <span class="keyword">if</span>(fork1()==<span class="number">0</span>)&#123;</div><div class="line">      runcmd(lcmd-&gt;cmd);</div><div class="line">    &#125;</div><div class="line">    wait(&amp;r);</div><div class="line">    runcmd(lcmd-&gt;next);</div><div class="line">    <span class="keyword">break</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> cmd* <span class="title">listcmd</span><span class="params">(<span class="keyword">struct</span> cmd* subcmd, <span class="keyword">struct</span> cmd* next)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> listcmd *cmd;</div><div class="line">  cmd = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(*cmd));</div><div class="line">  cmd-&gt;type = <span class="string">';'</span>;</div><div class="line">  cmd-&gt;cmd = subcmd;</div><div class="line">  cmd-&gt;next = next;</div><div class="line">  <span class="keyword">return</span> (<span class="keyword">struct</span> cmd*)cmd;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> cmd* <span class="title">parselist</span><span class="params">(<span class="keyword">char</span> **ps, <span class="keyword">char</span> *es)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> cmd *cmd;</div><div class="line">  cmd = parsepipe(ps,es);</div><div class="line">  <span class="keyword">if</span>(peek(ps,es,<span class="string">";"</span>))&#123;</div><div class="line">    gettoken(ps,es,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">    cmd = listcmd(cmd,parselist(ps,es));</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> cmd;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>listcmd的实现其实与pipecmd大同小异，将命令串成列表即可。</p>
+<p>background的实现更简单。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> backcmd&#123;</div><div class="line">  <span class="keyword">int</span> type;   <span class="comment">//&amp;</span></div><div class="line">  <span class="keyword">struct</span> cmd* cmd;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//run cmd</span></div><div class="line"><span class="keyword">case</span> <span class="string">'&amp;'</span>:</div><div class="line">    bcmd = (<span class="keyword">struct</span> backcmd*)cmd;</div><div class="line">    <span class="keyword">if</span>(fork1()==<span class="number">0</span>)&#123;</div><div class="line">      runcmd(bcmd-&gt;cmd);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> cmd* <span class="title">backcmd</span><span class="params">(<span class="keyword">struct</span> cmd*subcmd)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> backcmd *cmd;</div><div class="line">  cmd = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(*cmd));</div><div class="line">  cmd-&gt;type = <span class="string">'&amp;'</span>;</div><div class="line">  cmd-&gt;cmd = subcmd;</div><div class="line">  <span class="keyword">return</span> (<span class="keyword">struct</span> cmd*)cmd;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> cmd* <span class="title">parseback</span><span class="params">(<span class="keyword">char</span> **ps, <span class="keyword">char</span> *es)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> cmd *cmd;</div><div class="line">  cmd = parselist(ps,es);</div><div class="line">  <span class="keyword">if</span>(peek(ps,es,<span class="string">"&amp;"</span>))&#123;</div><div class="line">    gettoken(ps,es,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">    cmd = backcmd(cmd);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> cmd;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -393,7 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+            <a href="/tags/6-828/" rel="tag"># 6.828</a>
           
         </div>
       
@@ -402,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/20/LAB2/" rel="next" title="6.824 Lab2 Raft">
-                <i class="fa fa-chevron-left"></i> 6.824 Lab2 Raft
+              <a href="/2017/04/15/HW1-boot-xv6/" rel="next" title="HW1_boot_xv6">
+                <i class="fa fa-chevron-left"></i> HW1_boot_xv6
               </a>
             
           </div>
@@ -412,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/27/HappyNumberAndDigitalRoot/" rel="prev" title="Happy Number And Digital Root">
-                Happy Number And Digital Root <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/15/6-828-Lab1-Booting-a-PC/" rel="prev" title="6.828_Lab1_Booting_a_PC">
+                6.828_Lab1_Booting_a_PC <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -440,8 +444,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/25/LFU/"
-           data-title="LFU" data-url="http://Chaomin702.github.io/2016/12/25/LFU/">
+      <div class="ds-thread" data-thread-key="2017/04/15/HW2-shell/"
+           data-title="HW2_shell" data-url="http://Chaomin702.github.io/2017/04/15/HW2-shell/">
       </div>
     
   </div>
@@ -551,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LFU-Cache"><span class="nav-number">1.</span> <span class="nav-text">LFU Cache</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exec"><span class="nav-number">1.</span> <span class="nav-text">Exec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-redirection"><span class="nav-number">2.</span> <span class="nav-text">I/O redirection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PIPE"><span class="nav-number">3.</span> <span class="nav-text">PIPE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenge-exercises"><span class="nav-number">4.</span> <span class="nav-text">Challenge exercises</span></a></li></ol></div>
             
 
           </div>
